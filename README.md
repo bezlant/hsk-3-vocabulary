@@ -30,7 +30,7 @@ HSK 7, 8 and 9 share one vocabulary band in the syllabus, so they share one file
 
 Columns are `simplified`, `traditional`, `pinyin`, `level`, `definitions`. In CSV, multiple definitions are joined with `; `; in JSON they are an array. Pinyin is the citation reading with tone marks, before tone sandhi. The change list uses `simplified`, `hsk_2_level`, `hsk_3_level`, `status`, where status is one of `added`, `removed`, `same_level`, `moved_up`, `moved_down`.
 
-Filter the combined file by `level` for a cumulative list. Two words make those counts one short of the sum: 有点儿 and 有时 appear in the HSK 1 and HSK 2 files but not in the higher ones, where the syllabus stores them as 有一点儿 and 有时候.
+Filtering the combined file by `level` gives 300, 497, 990, 1,980, 3,559, 5,336 and 10,898 words, one or two above the cleaned cumulative counts in the table. Two words explain the gap: 有点儿 is in the HSK 1 file but not in HSK 2 and above, and 有时 is in the HSK 2 file but not in HSK 3 and above, because the higher files store them as 有一点儿 and 有时候. To reproduce the published cumulative lists exactly, drop 有点儿 from HSK 2 upward and 有时 from HSK 3 upward.
 
 ## How the lists were cleaned
 
@@ -41,10 +41,12 @@ The official PDF numbers its entries cumulatively and repeats written forms acro
 ## Sources and attribution
 
 - Word scope and levels: the final HSK examination syllabus (新版HSK考试大纲), 中外语言交流合作中心 / Center for Language Education and Cooperation, November 2025, quoted from the [Chinese Test Service Website](https://www.chinesetest.cn/syllabus) (www.chinesetest.cn). Its level system follows 《国际中文教育中文水平等级标准》 (GF 0025-2021), 教育部 and 国家语言文字工作委员会, 2021.
-- Pinyin and English definitions: [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict), used under CC BY-SA 4.0, with per-word edits and a few entries written by HSKStory for words CC-CEDICT lacks.
-- Traditional forms: CC-CEDICT, with OpenCC conversion for the nine words it does not cover.
+- Pinyin and English definitions: [CC-CEDICT](https://www.mdbg.net/chinese/dictionary?page=cedict), used under CC BY-SA 4.0. 105 of the 10,898 entries are curated by HSKStory instead, either because CC-CEDICT lacks the word or because its default sense was wrong for the word as the syllabus uses it. About ten of those were checked against English [Wiktionary](https://en.wiktionary.org), also CC BY-SA 4.0, and the rest against ordinary reference dictionaries.
+- Traditional forms: CC-CEDICT, with OpenCC `s2t` conversion for the nine words it does not cover.
 
 All rights in the syllabus and in GF 0025-2021 stay with their publishers. This repository holds extracted words, levels and readings only. It does not reproduce the syllabus PDF, its layout, or CTI and 汉考国际 branding, and nothing here is an official product of CTI, CLEC or 教育部.
+
+This build used the CC-CEDICT release dated 2026-01-02 (124,260 entries). `scripts/build_hsk_dataset.py` in the HSKStory repository regenerates every file here; a later CC-CEDICT release can change definitions and a few traditional forms.
 
 ## License
 
